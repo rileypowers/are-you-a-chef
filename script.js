@@ -143,6 +143,19 @@ function rightOrWrongSubmit() {
   console.log('`rightOrWrongSubmit` ran')
 }
 
+function deletus() {
+  console.log('`deletus` ran')
+  if (questionNumber <= 4) {
+    // $('.next-question-container').removeClass('.btn4');
+    $('.next-question-container').html(`
+    <a id="newBtn4" href="m-finalpage.html">Finish quiz</a>`);
+  }
+}
+//     if (questionNumber <= 4) {
+//       $('.next-question-container').removeClass('btn4');
+//     }
+    
+
 //k-rightanswer: on back button, make function that takes user back to the j-page2.html, but populates the answers placeholder with 
 //the next question, not the one they were on previously.
 function backToNextQuestion() {
@@ -161,6 +174,7 @@ function backToNextQuestion() {
 function runPage() {
   numberQuestion();
   showQuestion();
+  deletus();
   rightOrWrongSubmit();
   backToNextQuestion();
 }

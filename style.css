@@ -132,12 +132,24 @@ html {
   padding: 30px;
 }
 
+#btn{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 550px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
 .btn2{
   text-size: 18px;
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
   top: 600px;
+  z-index:1;
 }
 
 .btn3{
@@ -150,12 +162,26 @@ html {
 
 }
 
-.btn4{
+#btn4{
   text-size: 18px;
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
   top: 630px;
+  z-index:1;
+}
+
+#newBtn4 {
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 630px;
+  z-index:1;
+}
+
+.btn4{
+  display: none;
 }
 
 .btn5 {
