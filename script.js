@@ -66,42 +66,82 @@ function numberQuestion() {
 }
 
 //in answers placeholder, populate with questions. 
+//******ONE* */
 // function showQuestion(){
 //   console.log('`showQuestion` ran');
 //     const createQuestionInDom = `<p>${chefQuestions[2]}</p>`;
 //    // insert that HTML into the DOM
 //    $('.js-answers').html(createQuestionInDom);
 // }
+//******ENDONE */
 
-function generateItemElement(item, itemIndex, template) {
+//----
+
+//******TWO */
+// function generateItemElement(item, itemIndex, template) {
+// return `
+// <li>${item.name}</li>`;
+// }
+
+// function generateShowQuestion(questionList) {
+//   console.log("Generating shopping list element");
+//   const items = questionList.map((item, index) => generateItemElement(item, index));
+
+//   return items.join("");
+// }
+
+// function showQuestion() {
+//   // render one question to the dom
+//   console.log('`showQuestion` ran');
+//   const createQuestionInDom = generateShowQuestion(chefQuestions);
+
+//   // insert that HTML into the DOM
+//   $('.js-answers').html(createQuestionInDom);
+// }
+
+
+// //put a function on submit button, where if correct answer is selected before submit, which takes user to k-rightanswer.html.
+// //if incorrect answer is submitted, submit will take user to l-wronganswer.html.
+// function rightOrWrongSubmit() {
+//   console.log('`rightOrWrongSubmit` ran');
+// }
+//******ENDTWO */
+
+let questionNumber = 0;
+//j-page2: In title, populate question # with whatever # question the user is on (out of 5)
+function numberQuestion() {
+  console.log('`numberQuestion` ran');
+}
+//in answers placeholder, populate with questions. 
+// function showQuestion(){
+//   console.log('`showQuestion` ran');
+//     const createQuestionInDom = `<p>${chefQuestions[2]}</p>`;
+//    // insert that HTML into the DOM
+//    $('.js-answers').html(createQuestionInDom);
+// }
+function generateAnswerChoices(answer) {
   return `
-    <li>${item.name}</li>`;
+    <li>${answer}</li>`;
 }
-
-function generateShowQuestion(questionList) {
-  console.log("Generating shopping list element");
-  const items = questionList.map((item, index) => generateItemElement(item, index));
-
-  return items.join("");
+function generateShowQuestion(question) {
+  console.log('question', question)
+  const answersArr = Object.values(question.answers)
+  const answers = answersArr.map((answer) => generateAnswerChoices(answer));
+  console.log(answersArr)
+  return answers.join("");
 }
-
 function showQuestion() {
   // render one question to the dom
   console.log('`showQuestion` ran');
-  const createQuestionInDom = generateShowQuestion(chefQuestions);
-
+  const createQuestionInDom = generateShowQuestion(chefQuestions[questionNumber]);
   // insert that HTML into the DOM
   $('.js-answers').html(createQuestionInDom);
 }
 
-
-//put a function on submit button, where if correct answer is selected before submit, which takes user to k-rightanswer.html.
-//if incorrect answer is submitted, submit will take user to l-wronganswer.html.
-function rightOrWrongSubmit() {
-  console.log('`rightOrWrongSubmit` ran');
-}
-
 //hide "finish quiz" option until user is on question 5.
+function rightOrWrongSubmit() {
+  console.log('`rightOrWrongSubmit` ran')
+}
 
 //k-rightanswer: on back button, make function that takes user back to the j-page2.html, but populates the answers placeholder with 
 //the next question, not the one they were on previously.
