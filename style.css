@@ -1,0 +1,237 @@
+/* * {
+  font-family: 'Noto Sans KR', ;
+} */
+
+html { 
+  background: url(https://image.freepik.com/free-photo/eggs-healthy-vegetables-blue-colored-background_23-2147885856.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.heady {
+  width: 1200x;
+  text-align: center;
+  padding: 30px;
+  position:relative;
+  z-index:1;
+}
+
+#knife {
+  width: 1700px;
+  height: auto;
+  display: relative;
+  /* margin-left: auto;
+  margin-right:   */
+  /* width: 99%; */
+  position: absolute;
+  top: 375px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.title {
+  /* display: flex;
+  justify-content: center; */
+  font-size: 60px;
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.title2 {
+  /* display: flex;
+  justify-content: center; */
+  font-size: 60px;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  text-shadow: 4px 3px 0px grey, 9px 8px 0px rgba(0,0,0,0.15);
+}
+
+
+.my-header {
+  font-size: 40px;
+  box-sizing: border-box;
+  text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
+  display: inline-block;
+  position: unset;
+
+
+}
+
+.question-box {
+  /* border: solid 3px black; 
+  border-radius: 10px; 
+  background-color: aliceblue;
+  box-sizing: border-box; */
+  /* display: flex; 
+  align-self: center; 
+  align-items: center;
+   */
+  position: relative;
+  /* bottom: 400px; */
+  top: 280px;
+  z-index:1;
+  
+}
+
+.blurb {
+  /* margin-right: 20px;
+  margin-left: 20px; */
+  /* justify-content: center; */
+  z-index: 1;
+  box-sizing: border-box;
+  /* position: absolute; */
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 1px 0px 0px #ccc;
+}
+
+.answers {
+  /* display:flex;
+  justify-content: center; */
+  position: absolute;
+  top: 400px;
+  left: 45%;
+  z-index:1;
+}
+
+ .next-question-container {
+  display:flex;
+  justify-content: center;
+  position: relative;
+  top: 200px;
+} 
+
+
+.start-button-container {
+  display:flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.btn{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 550px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
+.btn2{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 600px;
+}
+
+.btn3{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 800px;
+  z-index:1;
+
+}
+
+.btn4{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 630px;
+}
+
+.btn5 {
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 600px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+  background-color: #fff;
+}
+ 
+
+
+.praise, .disgust {
+  /* border: 2px solid black; */
+  border-radius: 100px;
+  background-color: whitesmoke;
+  /* display: inline-block; */
+  padding: 30px;
+  position: absolute;
+  top: 70%;
+  left: 20%
+  /* right: 50%; */
+}
+
+
+/* .praise, .disgust {
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+  position:relative;
+  top: 400px;
+  z-index:1;
+} */
+
+.correct-img {
+  border: 3px solid black;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 325px;
+  display: inline-block;
+  z-index:-1;
+  max-height: 550px;
+  max-width: 800px;
+  overflow: hidden;
+}
+
+ #questions {
+  /* display: flex;
+  justify-content: center; */
+  position: absolute;
+  top: 175px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index:1;
+  font-size: 40px;
+  box-sizing: border-box;
+  text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
+  display: inline-block;
+  /* position: unset; */
+
+}
+  
+.results {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:1;
+  font-size: 40px;
+  box-sizing: border-box;
+  text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
+  display: inline-block;
+}
