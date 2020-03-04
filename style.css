@@ -132,6 +132,28 @@ html {
   padding: 30px;
 }
 
+.startBtn{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 550px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
+.submitBtn{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 550px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
 #btn{
   text-size: 18px;
   position: absolute;
@@ -261,3 +283,4 @@ html {
   text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
   display: inline-block;
 }
+

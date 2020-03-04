@@ -59,6 +59,17 @@ const chefQuestions = [{
   },
 ]
 
+// function cheffyQuestions() {
+//   var copy = {};
+//   for (if i=0; i <= 1; i++) {
+//   //  if (obj.hasOwnProperty(attr)) {
+//   //    copy[attr] = obj[attr];
+//   //  }
+//   }
+//   return copy;
+// }
+
+
 //j-page2: In title, populate question # with whatever # question the user is on (out of 5)
 function numberQuestion() {
   console.log('`numberQuestion` ran');
@@ -107,35 +118,60 @@ function numberQuestion() {
 // }
 //******ENDTWO */
 
+function justShowQuestion() {
+console.log(chefQuestions[questionNumber])
+}
+
+function hideStartButton() {
+  $('.startBtn').replaceWith(
+    `<label for="submit-answer"></label>
+    <input class="submitBtn" type="submit">   
+    `);
+}
+
 let questionNumber = 0;
 //j-page2: In title, populate question # with whatever # question the user is on (out of 5)
 function numberQuestion() {
   console.log('`numberQuestion` ran');
 }
-//in answers placeholder, populate with questions. 
-// function showQuestion(){
-//   console.log('`showQuestion` ran');
-//     const createQuestionInDom = `<p>${chefQuestions[2]}</p>`;
-//    // insert that HTML into the DOM
-//    $('.js-answers').html(createQuestionInDom);
-// }
-function generateAnswerChoices(answer) {
-  return `
-    <li>${answer}</li>`;
+
+
+function generateAnswerChoices(answerArray) {
+  let answerHtml = '';
+  answerArray.forEach((answer, i) => {
+    answerHtml += `
+    <label for="example">${answer}</label>
+    <input id="${'answer-' + i}" type="radio" />
+    `;
+  })
+  return answerHtml;
+  $(``)
 }
+
 function generateShowQuestion(question) {
   console.log('question', question)
-  const answersArr = Object.values(question.answers)
-  const answers = answersArr.map((answer) => generateAnswerChoices(answer));
-  console.log(answersArr)
-  return answers.join("");
+  const answersArr = Object.values(question.answers);
+  const answers = generateAnswerChoices(answersArr);
+  const godQuestions = justShowQuestion();
+  // console.log(answersArr)
+  // return answers.join("");
+  return `
+  ${godQuestions}
+  <form>
+  <fieldset>
+  ${answers}
+    <input type="submit" value="Submit Answer"/>
+  </fieldset>
+</form>
+  `
 }
+
 function showQuestion() {
   // render one question to the dom
   console.log('`showQuestion` ran');
   const createQuestionInDom = generateShowQuestion(chefQuestions[questionNumber]);
   // insert that HTML into the DOM
-  $('.js-answers').html(createQuestionInDom);
+  $('.question-box').html(createQuestionInDom);
 }
 
 //hide "finish quiz" option until user is on question 5.
@@ -154,7 +190,17 @@ function deletus() {
 //     if (questionNumber <= 4) {
 //       $('.next-question-container').removeClass('btn4');
 //     }
-    
+
+//create a function that shows questions in the dom when .startBtn is clicked, hides the button pushed, and puts a new button in its place.
+function startQuiz() {
+  $('.startBtn').click(function () {
+    console.log('hi')
+
+    showQuestion();
+    hideStartButton()
+
+  })
+}
 
 //k-rightanswer: on back button, make function that takes user back to the j-page2.html, but populates the answers placeholder with 
 //the next question, not the one they were on previously.
@@ -164,6 +210,15 @@ function backToNextQuestion() {
 
 //l-wronganswer: on back button, make function that takes user back to the j-page2.html, but populates the answers placeholder with 
 //the next question, not the one they were on previously.
+// function showRightOrWrong() {
+//   $('.submitBtn').click(function() {
+//     if 
+//     //correct answer is selected, insert html (.html maybe?) that shows right answer splash
+//     else
+//     //insert html for wrong answer splash
+//   })
+//   questionNumber++;
+// }
 
 //m-finalpage: In title, populate a number between "scored" and "out" with the number of correct clicks the user had. 
 //in blurb, populate a different result based on the number of correct answers. There are 5 different outcomes, and should be tied to 
@@ -173,7 +228,8 @@ function backToNextQuestion() {
 
 function runPage() {
   numberQuestion();
-  showQuestion();
+  // showQuestion();
+  startQuiz();
   deletus();
   rightOrWrongSubmit();
   backToNextQuestion();
