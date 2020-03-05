@@ -271,6 +271,19 @@ html {
   /* position: unset; */
 
 }
+
+#questions2 {
+  position: absolute;
+
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:1;
+  font-size: 40px;
+  box-sizing: border-box;
+  text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
+  display: inline-block;
+
+}
   
 .results {
   position: absolute;

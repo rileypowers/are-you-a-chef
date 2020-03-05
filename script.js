@@ -6,6 +6,7 @@ const chefQuestions = [{
       C: 'A city in France',
       D: 'A phrase which means “to put everything in its place”'
     },
+    correctAnswer: 'D',
     CORRECT: 'Mise-en-place is a French term. Directly translated, it means “to put everything in its place”, and it is implemented by preparing all ingredients before one begins cooking: veg chopped, items that need to be brought to room temp done thusly, all ingredients measured and laid out.',
     INCORRECT: 'It is not *autopopulate with wrong answer that was clicked*. Keep going!'
   },
@@ -18,6 +19,7 @@ const chefQuestions = [{
       C: 'Colony',
       D: 'Fougasse',
     },
+    correctAnswer: 'B',
     CORRECT: 'Back when we were still colonizing the US, settlers would carry around sourdough starter that could last their lifetime. The common term for this then was a “sponge.” Good job.',
     INCORRECT: 'It is not called *autopopulate with wrong answer that was clicked*. Better luck next time!',
   },
@@ -30,6 +32,7 @@ const chefQuestions = [{
       C: 'Bisollini',
       D: 'Ditalini',
     },
+    correctAnswer: 'C',
     CORRECT: 'Bucatini is like thick spaghetti with a hole in the center to trap sauce. Culurgiones is a pleated dumpling-like pasta typically filled with potato and mint. Ditalini is tiny star-shaed pasta usually used for soup. Bisollini is a made up word.',
     INCORRECT: 'It is not *autopopulate with wrong answer that was clicked*. Keep going.',
   },
@@ -42,6 +45,7 @@ const chefQuestions = [{
       C: 'Peanut Oil',
       D: 'Avocado Oil',
     },
+    correctAnswer: 'A',
     CORRECT: 'Olive oil has a much lower smoke point than the other oils listed. It has small organic material that lend taste, but will burn and turn bitter and the temps required for deep frying.',
     INCORRECT: '*autopopulate with wrong answer that was clicked* is fine for deep frying. Try the final question next.',
   },
@@ -54,20 +58,11 @@ const chefQuestions = [{
       C: 'A Caribbean seasoning',
       D: 'All of the above',
     },
+    correctAnswer: 'D',
     CORRECT: 'Adobo is a term that transcends cultures. In Filipino culture, it is a cooking technique and therefor the name of a dish. It is also a Spanish sauce you may have seen at the grocery store, canned with chilis. In the Caribbean, adobo is a seasoning of mostly salt, garlic podwer, and MSG.',
     INCORRECT: 'You are not wrong, but the correct answer is all of the above. This term transcends cultures.',
   },
 ]
-
-// function cheffyQuestions() {
-//   var copy = {};
-//   for (if i=0; i <= 1; i++) {
-//   //  if (obj.hasOwnProperty(attr)) {
-//   //    copy[attr] = obj[attr];
-//   //  }
-//   }
-//   return copy;
-// }
 
 
 //j-page2: In title, populate question # with whatever # question the user is on (out of 5)
@@ -76,57 +71,18 @@ function numberQuestion() {
 
 }
 
-//in answers placeholder, populate with questions. 
-//******ONE* */
-// function showQuestion(){
-//   console.log('`showQuestion` ran');
-//     const createQuestionInDom = `<p>${chefQuestions[2]}</p>`;
-//    // insert that HTML into the DOM
-//    $('.js-answers').html(createQuestionInDom);
-// }
-//******ENDONE */
-
-//----
-
-//******TWO */
-// function generateItemElement(item, itemIndex, template) {
-// return `
-// <li>${item.name}</li>`;
-// }
-
-// function generateShowQuestion(questionList) {
-//   console.log("Generating shopping list element");
-//   const items = questionList.map((item, index) => generateItemElement(item, index));
-
-//   return items.join("");
-// }
-
-// function showQuestion() {
-//   // render one question to the dom
-//   console.log('`showQuestion` ran');
-//   const createQuestionInDom = generateShowQuestion(chefQuestions);
-
-//   // insert that HTML into the DOM
-//   $('.js-answers').html(createQuestionInDom);
-// }
-
-
-// //put a function on submit button, where if correct answer is selected before submit, which takes user to k-rightanswer.html.
-// //if incorrect answer is submitted, submit will take user to l-wronganswer.html.
-// function rightOrWrongSubmit() {
-//   console.log('`rightOrWrongSubmit` ran');
-// }
-//******ENDTWO */
-
+//loop over answers object answerArray 
 function justShowQuestion() {
 console.log(chefQuestions[questionNumber])
+let questionContainer = [];
+for (i=0; i <= chefQuestions.length; i++) {
+  $(questionContainer.push(chefQuestions));
+}
+$('.question-box').html(questionContainer.question);
 }
 
 function hideStartButton() {
-  $('.startBtn').replaceWith(
-    `<label for="submit-answer"></label>
-    <input class="submitBtn" type="submit">   
-    `);
+  $('.startBtn').remove();
 }
 
 let questionNumber = 0;
@@ -160,12 +116,13 @@ function generateShowQuestion(question) {
   <form>
   <fieldset>
   ${answers}
-    <input type="submit" value="Submit Answer"/>
+    <input type="submit" class="submitBtn" value="Submit Answer"/>
   </fieldset>
 </form>
   `
 }
 
+//My question that is currently undefined
 function showQuestion() {
   // render one question to the dom
   console.log('`showQuestion` ran');
@@ -191,16 +148,27 @@ function deletus() {
 //       $('.next-question-container').removeClass('btn4');
 //     }
 
+function whatNumberQuestion() {
+  $('.my-header.title').remove();
+  $('.title').html(`
+    <h2 id="questions2">Question ${questionNumber +1} of 5</h2>
+  `)
+}
+
+
 //create a function that shows questions in the dom when .startBtn is clicked, hides the button pushed, and puts a new button in its place.
 function startQuiz() {
   $('.startBtn').click(function () {
     console.log('hi')
 
     showQuestion();
-    hideStartButton()
+    hideStartButton();
+    whatNumberQuestion();
 
   })
 }
+
+
 
 //k-rightanswer: on back button, make function that takes user back to the j-page2.html, but populates the answers placeholder with 
 //the next question, not the one they were on previously.
