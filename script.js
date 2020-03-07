@@ -105,8 +105,10 @@ function handleQuestionSubmit() {
   console.log('handleQuestionSubmit ran')
   $('.submitBtn').submit(event => {
     questionNumber++;
-    $('.question-box-work.submitBtn').remove();
+    $('.question-box-work .submitBtn').hide();
     whatNumberQuestion();
+    // $(".submitBtn").text(`Score: ${STORE.score}/${STORE.questions.length}`);
+    // $('.question-box-work .submitBtn').hide();
   });
   
   event.preventDefault();
