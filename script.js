@@ -72,14 +72,11 @@ function numberQuestion() {
 }
 
 //loop over answers object answerArray 
-function justShowQuestion() {
-console.log(chefQuestions[questionNumber])
-let questionContainer = [];
-for (i=0; i <= chefQuestions.length; i++) {
-  $(questionContainer.push(chefQuestions));
-}
-$('.question-box').html(questionContainer.question);
-}
+// function justShowQuestion(question) {
+//   // const currentQuestion = chefQuestions[questionNumber].question;
+//   console.log(question);
+//   $('#question-box-work').text(question.question);
+// }
 
 function hideStartButton() {
   $('.startBtn').remove();
@@ -104,19 +101,29 @@ function generateAnswerChoices(answerArray) {
   $(``)
 }
 
-function generateShowQuestion(question) {
-  console.log('question', question)
-  const answersArr = Object.values(question.answers);
+function handleQuestionSubmit() {
+  console.log('handleQuestionSubmit ran')
+  $('.submitBtn').submit(event => {
+    questionNumber++;
+    $('.question-box-work.submitBtn').remove();
+    whatNumberQuestion();
+  });
+  
+  event.preventDefault();
+}
+// showQuestion();
+
+
+function generateShowQuestion(questionObject) {
+  console.log('question', questionObject)
+  const answersArr = Object.values(questionObject.answers);
   const answers = generateAnswerChoices(answersArr);
-  const godQuestions = justShowQuestion();
-  // console.log(answersArr)
-  // return answers.join("");
   return `
-  ${godQuestions}
-  <form>
+  <h1 id="question-box-work">${questionObject.question}</h1>
+  <form onsubmit="handleQuestionSubmit()">
   <fieldset>
   ${answers}
-    <input type="submit" class="submitBtn" value="Submit Answer"/>
+    <input type="submit"  class="submitBtn" value="Submit Answer"/>
   </fieldset>
 </form>
   `
@@ -126,9 +133,11 @@ function generateShowQuestion(question) {
 function showQuestion() {
   // render one question to the dom
   console.log('`showQuestion` ran');
-  const createQuestionInDom = generateShowQuestion(chefQuestions[questionNumber]);
+  const createQuestionInDom = generateShowQuestion(chefQuestions[questionNumber])
+  //const createQuestionInDom = chefQuestions[questionNumber];
   // insert that HTML into the DOM
   $('.question-box').html(createQuestionInDom);
+
 }
 
 //hide "finish quiz" option until user is on question 5.
