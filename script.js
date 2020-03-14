@@ -151,7 +151,6 @@ function hideRightOrWrong() {
   $('.title2').remove;
 }
 
-//hide "finish quiz" option until user is on question 5.
 function rightOrWrongSubmit(answer) {
   console.log('`rightOrWrongSubmit` ran')
   let selectedAns = answer;
@@ -208,15 +207,68 @@ function rightOrWrongSubmit(answer) {
         `;
     } 
   } else { 
-    testyTester();
+    finalPageResults();
   }
 
 }
 
+function finalPageResults() {
+  let correctAns = chefQuestions[questionNumber].correctAnswer;
+  let correctAnsString = chefQuestions[questionNumber].answers[chefQuestions[questionNumber].correctAnswer];
+    if (correctAns.toString() === selectedAns) {
+      console.log('correct!')
+      correctNumber++;
+      return `
+        <section class="resultTitle">
+          <div>
+            <header>
+              <h1 class="title2">Correct!</h1>
+            </header>
+          </div>
+        </section> 
+        <section class="resultAns">
+          <div class="correct-img">
+            <img src="https://townsquare.media/site/490/files/2014/01/Guy.jpg?w=980&q=75" alt="Guy Fieri">
+            <p class="praise">Good Job!</p>
+          </div>
+        </section>
+        <section>
+          <form id="myForm3" onsubmit="finishQuiz">
+            <button type="submit" name="Finish quiz" class="submitBtnTwo">Finish quiz</button>
+          </form>
+        </section>
+        `;
+    } else {
+      console.log('wrong!')
+      return `
+        <section class="resultTitle">
+          <div>
+            <header>
+              <h1 class="title2">Incorrect...</h1>
+            </header>
+          </div>
+        </section> 
+        <section class="resultAns">
+          <div class="correct-img">
+            <img src='https://robbreportedit.files.wordpress.com/2018/04/gordon-ramsay-1-e1523056498302.jpg?w=1000&h=563' alt="Gordon Ramsey">
+            <p class="disgust">Wrong! The correct answer was: ${correctAnsString} </p>
+          </div>
+        </section>
+        <section>
+          <form id="myForm3" onsubmit="finishQuiz()">
+            <button type="submit" name="Finish quiz" class="submitBtnTwo">Finish quiz</button>
+          </form>
+        </section>
+        `;
+    } 
+}
 
 
-function testyTester() {
-  console.log('we are on question 5');
+function finishQuiz() {
+  console.log('we are almost done');
+  $('.resultTitle').remove();
+  $('.resultAns').remove();
+  $('#myForm3').remove();
   return `
       <section>
         <div class="results">
@@ -253,19 +305,6 @@ function backToQuestions() {
   // deletus();
 }
 
-//if questionNumber is === 5, change the submit button to a finish quiz button that then 
-//populates the body with finalpage.html HTML on the onsubmit. 
-// function deletus() {
-//   console.log('`deletus` ran')
-//   // if (questionNumber <= 4) {
-//     $('.resultTitle').remove();
-//     $('.resultAns').remove();
-//     $('.title').remove();
-//     $('.question-box').remove();
-//   //   $('.next-question-container').html(`
-//   //   <a id="newBtn4" href="m-finalpage.html">Finish quiz</a>`);
-//   // }
-// }
 
 function whatNumberQuestion() {
   $('.my-header.title').remove();
