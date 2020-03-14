@@ -121,7 +121,74 @@ html {
   z-index: 1;
 }
 
+.next-question-container {
+  display:flex;
+  justify-content: center;
+  position: relative;
+  top: 200px;
+  z-index: 1;
+}
+
+.hideUntil{
+  display: none;
+}
+
 .btn{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 550px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
+.startBtn{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 500px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
+.submitBtn{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 400px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
+.submitBtnTwo{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 750px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
+.nextQuestionBtn{
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 550px;
+  box-sizing: border-box;
+  border: 3px solid gray;
+  padding: 30px;
+}
+
+#btn{
   text-size: 18px;
   position: absolute;
   left: 50%;
@@ -138,6 +205,7 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   top: 600px;
+  z-index:1;
 }
 
 .btn3{
@@ -150,12 +218,26 @@ html {
 
 }
 
-.btn4{
+#btn4{
   text-size: 18px;
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
   top: 630px;
+  z-index:1;
+}
+
+#newBtn4 {
+  text-size: 18px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 630px;
+  z-index:1;
+}
+
+.btn4{
+  display: none;
 }
 
 .btn5 {
@@ -223,6 +305,19 @@ html {
   /* position: unset; */
 
 }
+
+#questions2 {
+  position: absolute;
+
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:1;
+  font-size: 40px;
+  box-sizing: border-box;
+  text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
+  display: inline-block;
+
+}
   
 .results {
   position: absolute;
@@ -235,3 +330,4 @@ html {
   text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
   display: inline-block;
 }
+

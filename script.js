@@ -1,11 +1,12 @@
 const chefQuestions = [{
     question: 'What is mise-en-place?',
     answers: {
-      A: 'A traditional French country dish',
-      B: 'The technique of rendering animal fat using low, slow heat',
-      C: 'A city in France',
-      D: 'A phrase which means “to put everything in its place”'
+      1: 'A traditional French country dish',
+      2: 'The technique of rendering animal fat using low, slow heat',
+      3: 'A city in France',
+      4: 'A phrase which means “to put everything in its place”',
     },
+    correctAnswer: 4,
     CORRECT: 'Mise-en-place is a French term. Directly translated, it means “to put everything in its place”, and it is implemented by preparing all ingredients before one begins cooking: veg chopped, items that need to be brought to room temp done thusly, all ingredients measured and laid out.',
     INCORRECT: 'It is not *autopopulate with wrong answer that was clicked*. Keep going!'
   },
@@ -13,11 +14,12 @@ const chefQuestions = [{
   {
     question: 'What is another term for a sourdough starter?',
     answers: {
-      A: 'Bark',
-      B: 'Sponge',
-      C: 'Colony',
-      D: 'Fougasse',
+      1: 'Bark',
+      2: 'Sponge',
+      3: 'Colony',
+      4: 'Fougasse',
     },
+    correctAnswer: 2,
     CORRECT: 'Back when we were still colonizing the US, settlers would carry around sourdough starter that could last their lifetime. The common term for this then was a “sponge.” Good job.',
     INCORRECT: 'It is not called *autopopulate with wrong answer that was clicked*. Better luck next time!',
   },
@@ -25,11 +27,12 @@ const chefQuestions = [{
   {
     question: 'Which of these is not a pasta shape?',
     answers: {
-      A: 'Bucatini',
-      B: 'Culurgiones',
-      C: 'Bisollini',
-      D: 'Ditalini',
+      1: 'Bucatini',
+      2: 'Culurgiones',
+      3: 'Bisollini',
+      4: 'Ditalini',
     },
+    correctAnswer: 3,
     CORRECT: 'Bucatini is like thick spaghetti with a hole in the center to trap sauce. Culurgiones is a pleated dumpling-like pasta typically filled with potato and mint. Ditalini is tiny star-shaed pasta usually used for soup. Bisollini is a made up word.',
     INCORRECT: 'It is not *autopopulate with wrong answer that was clicked*. Keep going.',
   },
@@ -37,11 +40,12 @@ const chefQuestions = [{
   {
     question: 'Which oil should not be used for deep frying?',
     answers: {
-      A: 'Olive Oil',
-      B: 'Canola Oil',
-      C: 'Peanut Oil',
-      D: 'Avocado Oil',
+      1: 'Olive Oil',
+      2: 'Canola Oil',
+      3: 'Peanut Oil',
+      4: 'Avocado Oil',
     },
+    correctAnswer: 1,
     CORRECT: 'Olive oil has a much lower smoke point than the other oils listed. It has small organic material that lend taste, but will burn and turn bitter and the temps required for deep frying.',
     INCORRECT: '*autopopulate with wrong answer that was clicked* is fine for deep frying. Try the final question next.',
   },
@@ -49,15 +53,17 @@ const chefQuestions = [{
   {
     question: 'What is Adobo?',
     answers: {
-      A: 'A traditional Philippine dish',
-      B: 'A Spanish sauce ',
-      C: 'A Caribbean seasoning',
-      D: 'All of the above',
+      1: 'A traditional Philippine dish',
+      2: 'A Spanish sauce ',
+      3: 'A Caribbean seasoning',
+      4: 'All of the above',
     },
+    correctAnswer: 4,
     CORRECT: 'Adobo is a term that transcends cultures. In Filipino culture, it is a cooking technique and therefor the name of a dish. It is also a Spanish sauce you may have seen at the grocery store, canned with chilis. In the Caribbean, adobo is a seasoning of mostly salt, garlic podwer, and MSG.',
     INCORRECT: 'You are not wrong, but the correct answer is all of the above. This term transcends cultures.',
   },
 ]
+
 
 //j-page2: In title, populate question # with whatever # question the user is on (out of 5)
 function numberQuestion() {
@@ -65,43 +71,224 @@ function numberQuestion() {
 
 }
 
-//in answers placeholder, populate with questions. 
-// function showQuestion(){
-//   console.log('`showQuestion` ran');
-//     const createQuestionInDom = `<p>${chefQuestions[2]}</p>`;
-//    // insert that HTML into the DOM
-//    $('.js-answers').html(createQuestionInDom);
+//loop over answers object answerArray 
+// function justShowQuestion(question) {
+//   // const currentQuestion = chefQuestions[questionNumber].question;
+//   console.log(question);
+//   $('#question-box-work').text(question.question);
 // }
 
-function generateItemElement(item, itemIndex, template) {
+function hideStartButton() {
+  $('.startBtn').remove();
+}
+
+let questionNumber = 0;
+let correctNumber =0;
+//j-page2: In title, populate question # with whatever # question the user is on (out of 5)
+function numberQuestion() {
+  console.log('`numberQuestion` ran');
+}
+
+
+
+function generateAnswerChoices(answerArray) {
+  let answerHtml = '';
+  answerArray.forEach((answer, i) => {
+    answerHtml += `
+    <input id="${'answer-' + i}" name="selectedButton" value="${i + 1}" type="radio" />
+    <label for="example">${answer}</label> <br />
+    `;
+  })
+  return answerHtml;
+}
+
+function handleQuestionSubmit() {
+  console.log('handleQuestionSubmit ran')
+    event.preventDefault();
+    const answer = $('input[name=selectedButton]:checked', '#myForm').val()
+    // questionNumber++;
+    whatNumberQuestion();
+    $('.question-box').toggle();
+    $('.title').toggle();
+    // $('.title').toggle();
+    //insert right or wrong answer funtion here
+    const result = rightOrWrongSubmit(answer);
+    // console.log('resultHtml', result)
+    displayFeedback(result);
+}
+
+function displayFeedback(result) {
+  $('.start-button-container').html(result);
+}
+
+function generateShowQuestion(questionObject) {
+  console.log('question', questionObject)
+  const answersArr = Object.values(questionObject.answers);
+  const answers = generateAnswerChoices(answersArr);
   return `
-    <li>${item.name}</li>`;
+  <h1 id="question-box-work">${questionObject.question}</h1>
+  <form id="myForm" onsubmit="handleQuestionSubmit()">
+    <fieldset>
+      ${answers}
+     <input type="submit" class="submitBtn"> 
+    </fieldset>
+  </form>
+  `
 }
 
-function generateShowQuestion(questionList) {
-  console.log("Generating shopping list element");
-  const items = questionList.map((item, index) => generateItemElement(item, index));
-
-  return items.join("");
-}
-
+//My question that is currently undefined
 function showQuestion() {
   // render one question to the dom
   console.log('`showQuestion` ran');
-  const createQuestionInDom = generateShowQuestion(chefQuestions);
-
+  const createQuestionInDom = generateShowQuestion(chefQuestions[questionNumber]);
+  //const createQuestionInDom = chefQuestions[questionNumber];
   // insert that HTML into the DOM
-  $('.js-answers').html(createQuestionInDom);
+  $('.question-box').html(createQuestionInDom);
+
 }
 
-
-//put a function on submit button, where if correct answer is selected before submit, which takes user to k-rightanswer.html.
-//if incorrect answer is submitted, submit will take user to l-wronganswer.html.
-function rightOrWrongSubmit() {
-  console.log('`rightOrWrongSubmit` ran');
+function hideRightOrWrong() {
+  $('.title2').remove;
 }
 
 //hide "finish quiz" option until user is on question 5.
+function rightOrWrongSubmit(answer) {
+  console.log('`rightOrWrongSubmit` ran')
+  let selectedAns = answer;
+ 
+  console.log('selected answer: ', selectedAns)
+  let correctAns = chefQuestions[questionNumber].correctAnswer;
+  let correctAnsString = chefQuestions[questionNumber].answers[chefQuestions[questionNumber].correctAnswer];
+  console.log('correct answer: ',correctAns)
+  if (questionNumber <= 4) {
+    if (correctAns.toString() === selectedAns) {
+      console.log('correct!')
+      correctNumber++;
+      return `
+        <section class="resultTitle">
+          <div>
+            <header>
+              <h1 class="title2">Correct!</h1>
+            </header>
+          </div>
+        </section> 
+        <section class="resultAns">
+          <div class="correct-img">
+            <img src="https://townsquare.media/site/490/files/2014/01/Guy.jpg?w=980&q=75" alt="Guy Fieri">
+            <p class="praise">Good Job!</p>
+          </div>
+        </section>
+        <section>
+          <form id="myForm2" onsubmit="backToQuestions()">
+            <button type="submit" name="Go back" class="submitBtnTwo">Go back</button>
+          </form>
+        </section>
+        `;
+    } else {
+      console.log('wrong!')
+      return `
+        <section class="resultTitle">
+          <div>
+            <header>
+              <h1 class="title2">Incorrect...</h1>
+            </header>
+          </div>
+        </section> 
+        <section class="resultAns">
+          <div class="correct-img">
+            <img src='https://robbreportedit.files.wordpress.com/2018/04/gordon-ramsay-1-e1523056498302.jpg?w=1000&h=563' alt="Gordon Ramsey">
+            <p class="disgust">Wrong! The correct answer was: ${correctAnsString} </p>
+          </div>
+        </section>
+        <section>
+          <form id="myForm2" onsubmit="backToQuestions()">
+            <button type="submit" name="Go back" class="submitBtnTwo">Go back</button>
+          </form>
+        </section>
+        `;
+    } 
+  } else { 
+    testyTester();
+  }
+
+}
+
+
+
+function testyTester() {
+  console.log('we are on question 5');
+  return `
+      <section>
+        <div class="results">
+          <h1>You scored ${correctNumber} out of 5 correct</h2>
+            <!-- <p>blurb</p> -->
+        </div>
+      </section>
+      <section class="question-box">
+        <div class="blurb">
+          <h2>You are a ___ etc. etc.</p>
+        </div>
+      </section>
+      <section>
+        <div class ="start-button-container">
+          <a class="btn5" href="index.html">Retake</a>
+        </div>
+      </section>
+    `
+}
+
+function backToQuestions() {
+  console.log('handleQuestionSubmit ran')
+  event.preventDefault();
+  questionNumber++;
+  $('.resultTitle').remove();
+  $('.resultAns').remove();
+  $('#myForm2').remove();
+  $('.title').toggle();
+  $('.question-box').toggle();
+  //  $('.start-button-container').html(whatNumberQuestion);
+  //  $('.start-button-container').html(showQuestion());
+  whatNumberQuestion();
+  showQuestion();
+  // deletus();
+}
+
+//if questionNumber is === 5, change the submit button to a finish quiz button that then 
+//populates the body with finalpage.html HTML on the onsubmit. 
+// function deletus() {
+//   console.log('`deletus` ran')
+//   // if (questionNumber <= 4) {
+//     $('.resultTitle').remove();
+//     $('.resultAns').remove();
+//     $('.title').remove();
+//     $('.question-box').remove();
+//   //   $('.next-question-container').html(`
+//   //   <a id="newBtn4" href="m-finalpage.html">Finish quiz</a>`);
+//   // }
+// }
+
+function whatNumberQuestion() {
+  $('.my-header.title').remove();
+  $('.title').html(`
+    <h2 id="questions2">Question ${questionNumber +1} of 5</h2>
+  `)
+}
+
+
+
+//create a function that shows questions in the dom when .startBtn is clicked, hides the button pushed, and puts a new button in its place.
+function startQuiz() {
+  $('.startBtn').click(function () {
+    console.log('hi')
+
+    showQuestion();
+    hideStartButton();
+    whatNumberQuestion();
+
+  })
+}
+
+
 
 //k-rightanswer: on back button, make function that takes user back to the j-page2.html, but populates the answers placeholder with 
 //the next question, not the one they were on previously.
@@ -109,22 +296,19 @@ function backToNextQuestion() {
   console.log('`backToNextQuestion` ran');
 }
 
-//l-wronganswer: on back button, make function that takes user back to the j-page2.html, but populates the answers placeholder with 
-//the next question, not the one they were on previously.
-
 //m-finalpage: In title, populate a number between "scored" and "out" with the number of correct clicks the user had. 
 //in blurb, populate a different result based on the number of correct answers. There are 5 different outcomes, and should be tied to 
 //the # value in this page.
 
 
-
 function runPage() {
+  // helpMe();
   numberQuestion();
-  showQuestion();
-  rightOrWrongSubmit();
+  // showQuestion();
+  startQuiz();
+  // deletus();
+  // rightOrWrongSubmit();
   backToNextQuestion();
 }
 
 $(runPage);
-
-// $(showQuestion);
