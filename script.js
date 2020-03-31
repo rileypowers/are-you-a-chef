@@ -64,19 +64,10 @@ const chefQuestions = [{
   },
 ]
 
-
-//j-page2: In title, populate question # with whatever # question the user is on (out of 5)
 function numberQuestion() {
   console.log('`numberQuestion` ran');
 
 }
-
-//loop over answers object answerArray 
-// function justShowQuestion(question) {
-//   // const currentQuestion = chefQuestions[questionNumber].question;
-//   console.log(question);
-//   $('#question-box-work').text(question.question);
-// }
 
 function hideStartButton() {
   $('.startBtn').remove();
@@ -84,41 +75,20 @@ function hideStartButton() {
 
 let questionNumber = 0;
 let correctNumber =0;
-//j-page2: In title, populate question # with whatever # question the user is on (out of 5)
+
 function numberQuestion() {
   console.log('`numberQuestion` ran');
 }
-
-
 
 function generateAnswerChoices(answerArray) {
   let answerHtml = '';
   answerArray.forEach((answer, i) => {
     answerHtml += `
-    <input id="${'answer-' + i}" name="selectedButton" value="${i + 1}" type="radio" />
-    <label for="example">${answer}</label> <br />
+    <input id="${'answer-' + i}" name="selectedButton" onclick="termsChanged(this)" value="${i + 1}" type="radio" />
+    <label for="example">${answer} </label> <br />
     `;
   })
   return answerHtml;
-}
-
-function handleQuestionSubmit() {
-  console.log('handleQuestionSubmit ran')
-    event.preventDefault();
-    const answer = $('input[name=selectedButton]:checked', '#myForm').val()
-    // questionNumber++;
-    whatNumberQuestion();
-    $('.question-box').toggle();
-    $('.title').toggle();
-    // $('.title').toggle();
-    //insert right or wrong answer funtion here
-    const result = rightOrWrongSubmit(answer);
-    // console.log('resultHtml', result)
-    displayFeedback(result);
-}
-
-function displayFeedback(result) {
-  $('.start-button-container').html(result);
 }
 
 function generateShowQuestion(questionObject) {
@@ -126,23 +96,44 @@ function generateShowQuestion(questionObject) {
   const answersArr = Object.values(questionObject.answers);
   const answers = generateAnswerChoices(answersArr);
   return `
+  <p>Score: ${correctNumber} / 5</p>
   <h1 id="question-box-work">${questionObject.question}</h1>
   <form id="myForm" onsubmit="handleQuestionSubmit()">
     <fieldset>
       ${answers}
-     <input type="submit" class="submitBtn"> 
+     <input type="submit" disabled class="submitBtn" id="submitEnable"> 
     </fieldset>
   </form>
   `
 }
 
-//My question that is currently undefined
+function termsChanged(checkBox){
+  if (checkBox.checked) { 
+      document.getElementById("submitEnable").disabled = false;
+  } else {
+      document.getElementById("submitEnable").disabled = true;
+  }
+}
+
+
+function handleQuestionSubmit() {
+  console.log('handleQuestionSubmit ran')
+    event.preventDefault();
+    const answer = $('input[name=selectedButton]:checked', '#myForm').val()
+    whatNumberQuestion();
+    $('.question-box').toggle();
+    $('.title').toggle();
+    const result = rightOrWrongSubmit(answer);
+    displayFeedback(result);
+}
+
+function displayFeedback(result) {
+  $('.start-button-container').html(result);
+}
+
 function showQuestion() {
-  // render one question to the dom
   console.log('`showQuestion` ran');
   const createQuestionInDom = generateShowQuestion(chefQuestions[questionNumber]);
-  //const createQuestionInDom = chefQuestions[questionNumber];
-  // insert that HTML into the DOM
   $('.question-box').html(createQuestionInDom);
 
 }
@@ -151,16 +142,14 @@ function hideRightOrWrong() {
   $('.title2').remove;
 }
 
-//hide "finish quiz" option until user is on question 5.
 function rightOrWrongSubmit(answer) {
   console.log('`rightOrWrongSubmit` ran')
   let selectedAns = answer;
- 
   console.log('selected answer: ', selectedAns)
   let correctAns = chefQuestions[questionNumber].correctAnswer;
   let correctAnsString = chefQuestions[questionNumber].answers[chefQuestions[questionNumber].correctAnswer];
   console.log('correct answer: ',correctAns)
-  if (questionNumber <= 4) {
+  if (questionNumber < 4) {
     if (correctAns.toString() === selectedAns) {
       console.log('correct!')
       correctNumber++;
@@ -208,33 +197,93 @@ function rightOrWrongSubmit(answer) {
         `;
     } 
   } else { 
-    testyTester();
+    console.log('We are on question 5');
+    return finalPageResults(selectedAns);
   }
 
 }
 
+function finalPageResults(selectedAns) {
+  let correctAns = chefQuestions[questionNumber].correctAnswer;
+  let correctAnsString = chefQuestions[questionNumber].answers[chefQuestions[questionNumber].correctAnswer];
+    if (correctAns.toString() === selectedAns) {
+      console.log('correct!')
+      correctNumber++;
+      return `
+        <section class="resultTitle">
+          <div>
+            <header>
+              <h1 class="title2">Correct!</h1>
+            </header>
+          </div>
+        </section> 
+        <section class="resultAns">
+          <div class="correct-img">
+            <img src="https://townsquare.media/site/490/files/2014/01/Guy.jpg?w=980&q=75" alt="Guy Fieri">
+            <p class="praise">Good Job!</p>
+          </div>
+        </section>
+        <section>
+          <form id="myForm3">
+            <button type="submit" name="Finish quiz" class="submitBtnTwo">Finish quiz</button>
+          </form>
+        </section>
+        `;
+    } else {
+      console.log('wrong!')
+      return `
+        <section class="resultTitle">
+          <div>
+            <header>
+              <h1 class="title2">Incorrect...</h1>
+            </header>
+          </div>
+        </section> 
+        <section class="resultAns">
+          <div class="correct-img">
+            <img src='https://robbreportedit.files.wordpress.com/2018/04/gordon-ramsay-1-e1523056498302.jpg?w=1000&h=563' alt="Gordon Ramsey">
+            <p class="disgust">Wrong! The correct answer was: ${correctAnsString} </p>
+          </div>
+        </section>
+        <section id="finalForm">
+          <form id="myForm3">
+            <button type="submit" name="Finish quiz" class="submitBtnTwo">Finish quiz</button>
+          </form>
+        </section>
+        `;
+    } 
+}
 
+function pleaseWork() {
+  $(document).on('submit', '#myForm3', function(event) {
+    event.preventDefault();
+    finishQuiz();
+  })
+}
 
-function testyTester() {
-  console.log('we are on question 5');
-  return `
-      <section>
-        <div class="results">
+function finishQuiz() {
+  console.log('we are almost done');
+  $('.question-box').remove();
+  $('.resultTitle').remove();
+  $('.resultAns').remove();
+  $('#myForm3').hide();
+  $('.start-button-container').html(`
+      <section class="TEST">
+        <div class="title3">
           <h1>You scored ${correctNumber} out of 5 correct</h2>
-            <!-- <p>blurb</p> -->
         </div>
       </section>
       <section class="question-box">
         <div class="blurb">
-          <h2>You are a ___ etc. etc.</p>
+          <h2>Congratulations! You've proven your abilities. Go out and cook or try again below.</p>
         </div>
       </section>
       <section>
-        <div class ="start-button-container">
+        <div class ="last-button-container">
           <a class="btn5" href="index.html">Retake</a>
         </div>
       </section>
-    `
+    `)
 }
 
 function backToQuestions() {
@@ -246,26 +295,9 @@ function backToQuestions() {
   $('#myForm2').remove();
   $('.title').toggle();
   $('.question-box').toggle();
-  //  $('.start-button-container').html(whatNumberQuestion);
-  //  $('.start-button-container').html(showQuestion());
   whatNumberQuestion();
   showQuestion();
-  // deletus();
 }
-
-//if questionNumber is === 5, change the submit button to a finish quiz button that then 
-//populates the body with finalpage.html HTML on the onsubmit. 
-// function deletus() {
-//   console.log('`deletus` ran')
-//   // if (questionNumber <= 4) {
-//     $('.resultTitle').remove();
-//     $('.resultAns').remove();
-//     $('.title').remove();
-//     $('.question-box').remove();
-//   //   $('.next-question-container').html(`
-//   //   <a id="newBtn4" href="m-finalpage.html">Finish quiz</a>`);
-//   // }
-// }
 
 function whatNumberQuestion() {
   $('.my-header.title').remove();
@@ -274,9 +306,6 @@ function whatNumberQuestion() {
   `)
 }
 
-
-
-//create a function that shows questions in the dom when .startBtn is clicked, hides the button pushed, and puts a new button in its place.
 function startQuiz() {
   $('.startBtn').click(function () {
     console.log('hi')
@@ -288,27 +317,15 @@ function startQuiz() {
   })
 }
 
-
-
-//k-rightanswer: on back button, make function that takes user back to the j-page2.html, but populates the answers placeholder with 
-//the next question, not the one they were on previously.
 function backToNextQuestion() {
   console.log('`backToNextQuestion` ran');
 }
 
-//m-finalpage: In title, populate a number between "scored" and "out" with the number of correct clicks the user had. 
-//in blurb, populate a different result based on the number of correct answers. There are 5 different outcomes, and should be tied to 
-//the # value in this page.
-
-
 function runPage() {
-  // helpMe();
   numberQuestion();
-  // showQuestion();
   startQuiz();
-  // deletus();
-  // rightOrWrongSubmit();
   backToNextQuestion();
+  pleaseWork();
 }
 
 $(runPage);
