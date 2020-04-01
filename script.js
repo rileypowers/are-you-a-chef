@@ -237,7 +237,7 @@ function finishQuiz() {
   $('.resultAns').remove();
   $('#myForm3').hide();
   $('.start-button-container').html(`
-      <section class="TEST">
+      <section>
         <div class="title3">
           <h1>You scored ${correctNumber} out of 5 correct</h2>
         </div>
