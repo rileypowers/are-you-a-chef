@@ -6,6 +6,10 @@ html {
   background-size: cover;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .heady {
   width: 1200x;
   text-align: center;
