@@ -7,8 +7,6 @@ const chefQuestions = [{
       4: 'A phrase which means “to put everything in its place”',
     },
     correctAnswer: 4,
-    CORRECT: 'Mise-en-place is a French term. Directly translated, it means “to put everything in its place”, and it is implemented by preparing all ingredients before one begins cooking: veg chopped, items that need to be brought to room temp done thusly, all ingredients measured and laid out.',
-    INCORRECT: 'It is not *autopopulate with wrong answer that was clicked*. Keep going!'
   },
 
   {
@@ -20,8 +18,6 @@ const chefQuestions = [{
       4: 'Fougasse',
     },
     correctAnswer: 2,
-    CORRECT: 'Back when we were still colonizing the US, settlers would carry around sourdough starter that could last their lifetime. The common term for this then was a “sponge.” Good job.',
-    INCORRECT: 'It is not called *autopopulate with wrong answer that was clicked*. Better luck next time!',
   },
 
   {
@@ -33,8 +29,6 @@ const chefQuestions = [{
       4: 'Ditalini',
     },
     correctAnswer: 3,
-    CORRECT: 'Bucatini is like thick spaghetti with a hole in the center to trap sauce. Culurgiones is a pleated dumpling-like pasta typically filled with potato and mint. Ditalini is tiny star-shaed pasta usually used for soup. Bisollini is a made up word.',
-    INCORRECT: 'It is not *autopopulate with wrong answer that was clicked*. Keep going.',
   },
 
   {
@@ -46,8 +40,6 @@ const chefQuestions = [{
       4: 'Avocado Oil',
     },
     correctAnswer: 1,
-    CORRECT: 'Olive oil has a much lower smoke point than the other oils listed. It has small organic material that lend taste, but will burn and turn bitter and the temps required for deep frying.',
-    INCORRECT: '*autopopulate with wrong answer that was clicked* is fine for deep frying. Try the final question next.',
   },
 
   {
@@ -59,15 +51,8 @@ const chefQuestions = [{
       4: 'All of the above',
     },
     correctAnswer: 4,
-    CORRECT: 'Adobo is a term that transcends cultures. In Filipino culture, it is a cooking technique and therefor the name of a dish. It is also a Spanish sauce you may have seen at the grocery store, canned with chilis. In the Caribbean, adobo is a seasoning of mostly salt, garlic podwer, and MSG.',
-    INCORRECT: 'You are not wrong, but the correct answer is all of the above. This term transcends cultures.',
   },
 ]
-
-function numberQuestion() {
-  console.log('`numberQuestion` ran');
-
-}
 
 function hideStartButton() {
   $('.startBtn').remove();
@@ -75,10 +60,6 @@ function hideStartButton() {
 
 let questionNumber = 0;
 let correctNumber =0;
-
-function numberQuestion() {
-  console.log('`numberQuestion` ran');
-}
 
 function generateAnswerChoices(answerArray) {
   let answerHtml = '';
@@ -92,13 +73,12 @@ function generateAnswerChoices(answerArray) {
 }
 
 function generateShowQuestion(questionObject) {
-  console.log('question', questionObject)
   const answersArr = Object.values(questionObject.answers);
   const answers = generateAnswerChoices(answersArr);
   return `
-  <p>Score: ${correctNumber} / 5</p>
+  <p id="score" ><b>Score: ${correctNumber} / 5</b></p>
   <h1 id="question-box-work">${questionObject.question}</h1>
-  <form id="myForm" onsubmit="handleQuestionSubmit()">
+  <form id="myForm" for="submitEnabled" onsubmit="handleQuestionSubmit()">
     <fieldset>
       ${answers}
      <input type="submit" disabled class="submitBtn" id="submitEnable"> 
@@ -117,7 +97,6 @@ function termsChanged(checkBox){
 
 
 function handleQuestionSubmit() {
-  console.log('handleQuestionSubmit ran')
     event.preventDefault();
     const answer = $('input[name=selectedButton]:checked', '#myForm').val()
     whatNumberQuestion();
@@ -132,7 +111,6 @@ function displayFeedback(result) {
 }
 
 function showQuestion() {
-  console.log('`showQuestion` ran');
   const createQuestionInDom = generateShowQuestion(chefQuestions[questionNumber]);
   $('.question-box').html(createQuestionInDom);
 
@@ -143,15 +121,11 @@ function hideRightOrWrong() {
 }
 
 function rightOrWrongSubmit(answer) {
-  console.log('`rightOrWrongSubmit` ran')
-  let selectedAns = answer;
-  console.log('selected answer: ', selectedAns)
-  let correctAns = chefQuestions[questionNumber].correctAnswer;
-  let correctAnsString = chefQuestions[questionNumber].answers[chefQuestions[questionNumber].correctAnswer];
-  console.log('correct answer: ',correctAns)
+  const selectedAns = answer;
+  const correctAns = chefQuestions[questionNumber].correctAnswer;
+  const correctAnsString = chefQuestions[questionNumber].answers[chefQuestions[questionNumber].correctAnswer];
   if (questionNumber < 4) {
     if (correctAns.toString() === selectedAns) {
-      console.log('correct!')
       correctNumber++;
       return `
         <section class="resultTitle">
@@ -169,12 +143,11 @@ function rightOrWrongSubmit(answer) {
         </section>
         <section>
           <form id="myForm2" onsubmit="backToQuestions()">
-            <button type="submit" name="Go back" class="submitBtnTwo">Go back</button>
+            <button type="submit" name="Go back" class="submitBtnTwo">Continue</button>
           </form>
         </section>
         `;
     } else {
-      console.log('wrong!')
       return `
         <section class="resultTitle">
           <div>
@@ -191,23 +164,21 @@ function rightOrWrongSubmit(answer) {
         </section>
         <section>
           <form id="myForm2" onsubmit="backToQuestions()">
-            <button type="submit" name="Go back" class="submitBtnTwo">Go back</button>
+            <button type="submit" name="Go back" class="submitBtnTwo">Continue</button>
           </form>
         </section>
         `;
     } 
   } else { 
-    console.log('We are on question 5');
     return finalPageResults(selectedAns);
   }
 
 }
 
 function finalPageResults(selectedAns) {
-  let correctAns = chefQuestions[questionNumber].correctAnswer;
-  let correctAnsString = chefQuestions[questionNumber].answers[chefQuestions[questionNumber].correctAnswer];
+  const correctAns = chefQuestions[questionNumber].correctAnswer;
+  const correctAnsString = chefQuestions[questionNumber].answers[chefQuestions[questionNumber].correctAnswer];
     if (correctAns.toString() === selectedAns) {
-      console.log('correct!')
       correctNumber++;
       return `
         <section class="resultTitle">
@@ -230,7 +201,6 @@ function finalPageResults(selectedAns) {
         </section>
         `;
     } else {
-      console.log('wrong!')
       return `
         <section class="resultTitle">
           <div>
@@ -254,7 +224,7 @@ function finalPageResults(selectedAns) {
     } 
 }
 
-function pleaseWork() {
+function finalPage() {
   $(document).on('submit', '#myForm3', function(event) {
     event.preventDefault();
     finishQuiz();
@@ -262,7 +232,6 @@ function pleaseWork() {
 }
 
 function finishQuiz() {
-  console.log('we are almost done');
   $('.question-box').remove();
   $('.resultTitle').remove();
   $('.resultAns').remove();
@@ -287,7 +256,6 @@ function finishQuiz() {
 }
 
 function backToQuestions() {
-  console.log('handleQuestionSubmit ran')
   event.preventDefault();
   questionNumber++;
   $('.resultTitle').remove();
@@ -308,24 +276,15 @@ function whatNumberQuestion() {
 
 function startQuiz() {
   $('.startBtn').click(function () {
-    console.log('hi')
-
     showQuestion();
     hideStartButton();
     whatNumberQuestion();
-
   })
 }
 
-function backToNextQuestion() {
-  console.log('`backToNextQuestion` ran');
-}
-
 function runPage() {
-  numberQuestion();
   startQuiz();
-  backToNextQuestion();
-  pleaseWork();
+  finalPage();
 }
 
 $(runPage);

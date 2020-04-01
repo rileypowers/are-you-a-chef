@@ -62,7 +62,6 @@ html {
   display: inline-block;
   position: unset;
 
-
 }
 
 .question-box {
@@ -297,4 +296,16 @@ html {
   box-sizing: border-box;
   text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
   display: inline-block;
+}
+
+#myForm {
+  background-color: rgb(167, 166, 166);
+  border: 2px solid black;
+}
+
+#score {
+  padding: 8px;
+  background-color: rgb(167, 166, 166);
+  border: 2px solid black;
+  border-radius: 20px;
 }
